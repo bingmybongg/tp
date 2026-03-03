@@ -297,32 +297,195 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **Actor** is the `Trainer`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+**Use case: UC1 - Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters the add command with all mandatory parameters (n/ p/ e/ a/ av/ t/) and optional parameters if any.
+2. PTCoach validates all parameters.
+3. PTCoach checks if the phone number duplicates an existing client.
+4. PTCoach creates a new client record.
+5. PTCoach adds the client to the client list.
+6. PTCoach displays the message: “New person added: [CLIENT_NAME]”.
+7. PTCoach clears the input field.
+8. PTCoach automatically saves the updated data.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
+  * 1a1. PTCoach shows an error message.
 
-  Use case ends.
+    Use case ends.
+  
+* 2a. Invalid parameter format 
+  * 2a1. PTCoach shows the corresponding validation error message.
+  
+    Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Unknown flag provided 
+  * 2b1. PTCoach shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+    Use case ends.
+* 2c. Redundant flag detected (multiple values for same flag)
+  * 2c1. PTCoach shows an error message.
+    
+    Use case ends.
 
-      Use case resumes at step 2.
+* 3a. Duplicate phone number detected
+  * 3a1. PTCoach prompts user for confirmation to replace existing record.
+  * 3a2. User confirms replacement.
+  * 3a3. PTCoach replaces the existing client record.
+  * 3a4. PTCoach displays success message.
+  
+    Use case ends.
+  
+  * 3a5. User confirms replacement.
+  * 3a6. PTCoach cancels the add operation.
 
-*{More to be added}*
+    Use case ends.
+
+
+**Use case: UC2 - Find a specific client**
+
+**MSS**
+
+1. User requests to find a specific clients
+2. PTCoach shows list of all clients that match the person(s)
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The find argument is empty
+  * 2a1. PTCoach shows, “Error: Invalid command format. Parameter: find [KEYWORD]. Eg. find alice”
+    
+    Use case ends.
+* 2b. Find a non-name
+  * 2b1. PTCoach shows, “Error: Invalid name search. Parameter: find [KEYWORD]. Eg. find alice”
+     
+    Use case ends.
+
+**Use case: UC3 - Update a client**
+
+**MSS**
+
+1. User requests to update a specific client by index and provides new details by specifying the parameter to update (any valid parameter specified in add command).
+2. PTCoach validates the index and the new details.
+3. PTCoach updates the client and displays the updated details.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty or the provided index is out of bounds.
+  * 2a1. PTCoach shows an error message: “Invalid index provided.”
+  
+    Use case ends.
+
+* 2b. The new details provided are in an invalid format.
+  * 2b1. PTCoach shows an error message: “Invalid field format: [field name].”
+  
+    Use case ends.
+
+* 2c. The update would create a duplicate of an existing person.
+  * 2c1. PTCoach shows an error message: “This person already exists in the records.”
+  
+    Use case ends.
+
+**Use case: UC4 - Delete a client**
+
+**MSS**
+
+1. User requests to delete a specific client by index.
+2. PTCoach deletes the client and removes it from storage.
+3. PTCoach shows a success message confirming the deletion.
+
+   Use case ends
+
+**Extensions**
+
+* 1a. The list is empty or the provided index is out of bounds.
+  * 1a1. PTCoach shows an error message: “Invalid index provided.”
+  
+    Use case ends.
+
+**Use case: UC5 - Launch the app via command line**
+
+**MSS**
+
+1. User requests to launch the app via command line (java -jar PTCoach.jar)
+2. PTCoach launches
+
+   Use case ends
+
+**Extensions**
+
+* 1a. App can’t launch due to wrong input (java -jar PTCoach.jarn)
+  * 1a1. PTCoach shows “Error: Unable to access jarfile PTCoach.jarn”
+  * 1a2. User changes input to “java -jar PTCoach.jar”
+  * 1a3. PTCoach launches
+  
+    Use case ends.
+* 1b. App can’t launch due to wrong directory (java -jar PTCoach.jar)
+  * 1b1. PTCoach shows  “Error: Unable to access jarfile PTCoach.jar”
+  * 1b2. User changes to the directory containing PTCoach.jar using cd command
+  * 1b3. User enters “java -jar PTCoach.jar”
+  * PTCoach launches
+  
+    Use case ends
+
+**Use case: UC6 - List all clients**
+
+**MSS**
+
+1. User requests to view clients
+2. PTCoach shows list of all clients
+3. Use case ends
+
+**Extensions**
+* 2a. The list is empty
+  * 2a1. PTCoach shows “No clients, try adding a client using /add” message.
+  
+    Use case ends.
+
+**Use case: UC7 - Read client details**
+
+**MSS**
+
+1. The user enters a read command with one keyword and option flags in the command line.
+2. PTCoach validates the command format.
+3. PTCoach searches the client database using the provided keywords.
+4. PTCoach selects the first matching client record.
+5. PTCoach retrieves the requested particulars based on the specified options.
+6. PTCoach displays the requested client data in the command-line interface.
+
+   Use case ends
+
+**Extensions**
+* 2a. Invalid parameter format
+  * 2a1. PTCoach shows the corresponding validation error message.
+  
+    Use case ends.
+
+* 2b. Unknown flag provided
+  * 2b1. PTCoach shows the corresponding validation error message.
+  
+    Use case ends.
+
+* 2c. Redundant flag detected (multiple values for same flag)
+  * 2c1. PTCoach shows the corresponding validation error message.
+  
+    Use case ends.
+
+* 3a. Client record not found
+  * 3a1. PTCoach shows the corresponding validation error message.
+  
+    Use case ends.
 
 ### Non-Functional Requirements
 
