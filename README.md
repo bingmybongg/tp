@@ -7,12 +7,26 @@
 
 PTCoach is a desktop application designed for independent personal trainers to manage their client database efficiently.
 
-It allows trainers to:
-- Add new clients with detailed information such as availability, training goals, injury status, skill level, and progress records.
-- Search for clients quickly using name-based filtering.
+PTCoach is a desktop application designed for independent personal trainers to manage their client database efficiently.
+
+Each client profile includes:
+- Name
+- Contact Number
+- Address
+- Weekly Availability
+- Training Goals
+- Skill Level*
+- Progress Record*
+- Injury Status*
+
+\* Optional particulars
+
+The application allows trainers to:
+- Add new clients.
+- Search for clients by name.
 - Delete clients who have stopped training.
-- List all clients currently under the trainer.
-- Read specific client details selectively.
+- List all clients.
+- Read specific client details.
 - Automatically save all changes to a local file.
 
 PTCoach is optimized for trainers who prefer a fast Command Line Interface (CLI) while still benefiting from a graphical display of client cards.
