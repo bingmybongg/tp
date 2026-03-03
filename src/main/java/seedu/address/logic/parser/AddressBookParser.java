@@ -77,7 +77,11 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case RemarkCommand.COMMAND_WORD:
+<<<<<<< Updated upstream
             return new RemarkCommandParser().parse(arguments);
+=======
+            return new RemarkCommand();
+>>>>>>> Stashed changes
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
