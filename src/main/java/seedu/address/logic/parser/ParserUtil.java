@@ -85,7 +85,7 @@ public class ParserUtil {
      * Parses a {@code String availability} into an {@code Availability}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code availability} is invalid.
      */
     public static Availability parseAvailability(String availability) throws ParseException {
         requireNonNull(availability);
