@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Represents a Person's availability in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAvailability(String)}
@@ -14,6 +17,7 @@ public class Availability {
             + "Example: mon:0900-1000,tue:1000-1100,wed:1100-1200\n"
             + "- Days must be a 3-letter abbreviation (mon, tue, wed, thu, fri, sat, sun).\n"
             + "- Times must be in valid 24-hour format (0000-2359).\n"
+            + "- Start time must be strictly before the end time.\n"
             + "- It cannot be left completely empty.";
 
     /*
@@ -47,7 +51,27 @@ public class Availability {
      * Returns true if a given string is a valid availability.
      */
     public static boolean isValidAvailability(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+
+        String[] slots = test.split(",");
+        Set<String> seenDays = new HashSet<>();
+
+        for (String slot : slots) {
+            String[] parts = slot.split(":");
+            String day = parts[0].toLowerCase();
+            String[] times = parts[1].split("-");
+
+            int startTime = Integer.parseInt(times[0]);
+            int endTime = Integer.parseInt(times[1]);
+
+            if (!seenDays.add(day) || startTime >= endTime) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

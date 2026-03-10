@@ -31,6 +31,9 @@ public class AvailabilityTest {
         assertFalse(Availability.isValidAvailability("mon: 1900-2000,sat: 2000-2100")); // space in each day
         assertFalse(Availability.isValidAvailability("monday:1900-2000,saturday:2000-2100")); // days spelt in full
         assertFalse(Availability.isValidAvailability("mon:2490-1680,sat:-900+1230")); // invalid time
+        assertFalse(Availability.isValidAvailability("mon:2100-1500")); // start time later than end time
+        assertFalse(Availability.isValidAvailability("mon:2100-2100")); // same start and end time
+        assertFalse(Availability.isValidAvailability("mon:2100-2200,mon:2100-2200")); // duplicate days
         assertFalse(Availability.isValidAvailability("-")); // one character
 
         // valid availability
