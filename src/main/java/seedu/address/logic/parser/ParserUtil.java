@@ -129,9 +129,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code Progress Record} is invalid.
      */
     public static ProgressRecord parseProgressRecord(String progressRecord) throws ParseException {
-        if (progressRecord == null) {
-            return new ProgressRecord();
-        }
         requireNonNull(progressRecord);
         String trimmedProgressRecord = progressRecord.trim();
         if (!ProgressRecord.isValidProgress(trimmedProgressRecord)) {
