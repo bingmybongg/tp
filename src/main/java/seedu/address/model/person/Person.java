@@ -21,20 +21,39 @@ public class Person {
     private final Address address;
     private final TrainingGoal trainingGoal;
     private final Availability availability;
+    private final Skill skill;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  TrainingGoal trainingGoal, Availability availability) {
-        requireAllNonNull(name, phone, email, address, trainingGoal, availability);
-
+    public Person(Name name, Phone phone, Email email, Address address, TrainingGoal trainingGoal,
+                  Availability availability, Skill skill) {
+        requireAllNonNull(name, phone, email, address, trainingGoal, availability, skill);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.trainingGoal = trainingGoal;
         this.availability = availability;
+        this.skill = skill;
+    }
+
+    /**
+     * Creates a {@code Person} without an explicit skill level.
+     * The skill level defaults to novice.
+     *
+     * This constructor is provided to support edit command.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, TrainingGoal trainingGoal,
+                  Availability availability) {
+        requireAllNonNull(name, phone, email, address, trainingGoal, availability);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.trainingGoal = trainingGoal;
+        this.availability = availability;
+        this.skill = new Skill(Skill.SKILL_NOVICE);
     }
 
     public Name getName() {
@@ -59,6 +78,10 @@ public class Person {
 
     public Availability getAvailability() {
         return availability;
+    }
+
+    public Skill getSkill() {
+        return skill;
     }
 
     /**
@@ -95,13 +118,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && trainingGoal.equals(otherPerson.trainingGoal)
-                && availability.equals(otherPerson.availability);
+                && availability.equals(otherPerson.availability)
+                && skill.equals(otherPerson.skill);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, trainingGoal, availability);
+        return Objects.hash(name, phone, email, address, trainingGoal, availability, skill);
     }
 
     @Override
@@ -113,6 +137,7 @@ public class Person {
                 .add("address", address)
                 .add("trainingGoal", trainingGoal)
                 .add("availability", availability)
+                .add("skill", skill)
                 .toString();
     }
 

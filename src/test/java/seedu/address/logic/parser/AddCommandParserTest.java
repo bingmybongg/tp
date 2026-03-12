@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_AVAILABILITY_
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SKILL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRAINING_GOAL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -19,6 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.SKILL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TRAINING_GOAL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TRAINING_GOAL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -48,6 +50,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Skill;
 import seedu.address.model.person.TrainingGoal;
 import seedu.address.testutil.PersonBuilder;
 
@@ -60,7 +63,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TRAINING_GOAL_DESC_BOB + AVAILABILITY_DESC_BOB, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TRAINING_GOAL_DESC_BOB + AVAILABILITY_DESC_BOB + SKILL_DESC_BOB,
+                new AddCommand(expectedPerson));
     }
 
     @Test
@@ -146,7 +150,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // missing optional fields have default values
         Person expectedPerson = new PersonBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + ADDRESS_DESC_AMY + TRAINING_GOAL_DESC_AMY + AVAILABILITY_DESC_AMY,
@@ -217,6 +221,10 @@ public class AddCommandParserTest {
         // invalid training goal
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_TRAINING_GOAL_DESC + AVAILABILITY_DESC_BOB, TrainingGoal.MESSAGE_CONSTRAINTS);
+
+        // invalid skill
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TRAINING_GOAL_DESC_BOB + AVAILABILITY_DESC_BOB + INVALID_SKILL_DESC, Skill.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC

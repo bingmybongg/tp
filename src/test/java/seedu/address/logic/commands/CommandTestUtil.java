@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRAINING_GOAL;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -35,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_SKILL_AMY = "novice";
+    public static final String VALID_SKILL_BOB = "pro";
     public static final String VALID_TRAINING_GOAL_AMY = "1 million push ups";
     public static final String VALID_TRAINING_GOAL_BOB = "stay fit";
     public static final String VALID_AVAILABILITY_AMY = "mon:0900-1000,tue:0000-2359,wed:0100-0300";
@@ -48,6 +51,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String SKILL_DESC_AMY = " " + PREFIX_SKILL + VALID_SKILL_AMY;
+    public static final String SKILL_DESC_BOB = " " + PREFIX_SKILL + VALID_SKILL_BOB;
     public static final String TRAINING_GOAL_DESC_AMY = " " + PREFIX_TRAINING_GOAL + VALID_TRAINING_GOAL_AMY;
     public static final String TRAINING_GOAL_DESC_BOB = " " + PREFIX_TRAINING_GOAL + VALID_TRAINING_GOAL_BOB;
     public static final String AVAILABILITY_DESC_AMY = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AMY;
@@ -57,6 +62,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_SKILL_DESC = " " + PREFIX_SKILL + "master"; // not an allowed skill level
     public static final String INVALID_TRAINING_GOAL_DESC = " "
             + PREFIX_TRAINING_GOAL; // empty string not allowed for trainingGoals
     public static final String INVALID_AVAILABILITY_DESC = " " + PREFIX_AVAILABILITY + "mon: 0900"; // space not allowed

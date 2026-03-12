@@ -37,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
     private Label availability;
     @FXML
     private Label email;
+    @FXML
+    private Label skill;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,5 +52,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         availability.setText(person.getAvailability().value);
         email.setText(person.getEmail().value);
+        skill.setText("Skill: " + person.getSkill().value);
     }
 }

@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -10,6 +12,7 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Skill;
 import seedu.address.model.person.TrainingGoal;
 
 /**
@@ -121,4 +124,26 @@ public class ParserUtil {
         }
         return new TrainingGoal(trimmedTrainingGoal);
     }
+
+    /**
+     * Parses an {@code Optional<String> skill} into a {@code Skill}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return parsed {@code Skill}, or novice if the
+     *         skill value is not present.
+     * @throws ParseException if the given {@code skill} is invalid.
+     */
+    public static Skill parseSkill(Optional<String> skill) throws ParseException {
+        requireNonNull(skill);
+        if (skill.isEmpty()) {
+            return new Skill(Skill.SKILL_NOVICE);
+        }
+
+        String trimmedSkill = skill.get().trim();
+        if (!Skill.isValidSkill(trimmedSkill)) {
+            throw new ParseException(Skill.MESSAGE_CONSTRAINTS);
+        }
+        return new Skill(trimmedSkill);
+    }
+
 }

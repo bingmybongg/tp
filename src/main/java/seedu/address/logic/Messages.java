@@ -46,7 +46,9 @@ public class Messages {
                 .append("; Training Goal: ")
                 .append(person.getTrainingGoal())
                 .append("; Availability: ")
-                .append(person.getAvailability());
+                .append(person.getAvailability())
+                .append("; Skill: ")
+                .append(person.getSkill());
         return builder.toString();
     }
 

@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Skill;
 import seedu.address.model.person.TrainingGoal;
 
 /**
@@ -23,6 +24,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String skill;
     private final String trainingGoal;
     private final String availability;
 
@@ -32,14 +34,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("trainingGoal") String trainingGoal, @JsonProperty("availability") String availability) {
-
+            @JsonProperty("trainingGoal") String trainingGoal, @JsonProperty("availability") String availability,
+            @JsonProperty("skill") String skill) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.trainingGoal = trainingGoal;
         this.availability = availability;
+        this.skill = skill;
     }
 
     /**
@@ -52,6 +55,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         trainingGoal = source.getTrainingGoal().value;
         availability = source.getAvailability().value;
+        skill = source.getSkill().value;
     }
 
     /**
@@ -110,7 +114,17 @@ class JsonAdaptedPerson {
         }
         final Availability modelAvailability = new Availability(availability);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTrainingGoal, modelAvailability);
+        final Skill modelSkill;
+        if (skill == null) {
+            modelSkill = new Skill(Skill.SKILL_NOVICE);
+        } else if (!Skill.isValidSkill(skill)) {
+            throw new IllegalValueException(Skill.MESSAGE_CONSTRAINTS);
+        } else {
+            modelSkill = new Skill(skill);
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTrainingGoal, modelAvailability,
+                modelSkill);
     }
 
 }
