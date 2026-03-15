@@ -350,3 +350,26 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.skill_tag_label {
+    -fx-padding: 8 12 8 12;
+    -fx-background-radius: 20; /* This creates the rounded pill shape */
+    -fx-border-radius: 20;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-pref-width: 120px;
+    -fx-alignment: center;
+}
+
+.skill-beginner {
+    -fx-background-color: #3b82f6; /* Blue */
+}
+
+.skill-intermediate {
+    -fx-background-color: #f97316; /* Orange */
+}
+
+.skill-advanced {
+    -fx-background-color: #10b981; /* Green */
+}
