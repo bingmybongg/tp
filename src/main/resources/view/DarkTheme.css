@@ -356,7 +356,7 @@
     -fx-background-radius: 20; /* This creates the rounded pill shape */
     -fx-border-radius: 20;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
     -fx-text-fill: white;
     -fx-pref-width: 120px;
     -fx-alignment: center;
@@ -372,4 +372,20 @@
 
 .skill-advanced {
     -fx-background-color: #10b981; /* Green */
+}
+
+.divider {
+    -fx-background-color: white; /* #3e4450; */
+}
+
+.list-cell .availability_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #0e9af3;
+}
+
+.list-cell .progress_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: orange;
 }
