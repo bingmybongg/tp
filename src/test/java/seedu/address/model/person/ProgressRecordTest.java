@@ -31,6 +31,7 @@ public class ProgressRecordTest {
         assertFalse(ProgressRecord.isValidProgress("101%"));
         assertFalse(ProgressRecord.isValidProgress("-1%"));
         assertFalse(ProgressRecord.isValidProgress("-1%"));
+        assertFalse(ProgressRecord.isValidProgress("10/0"));
 
         // valid progress record
         assertTrue(ProgressRecord.isValidProgress("100%"));
@@ -50,6 +51,8 @@ public class ProgressRecordTest {
         assertTrue(ProgressRecord.parseToPercentage("1/2") == 50.0);
         assertTrue(ProgressRecord.parseToPercentage("100%") == 100.0);
         assertTrue(ProgressRecord.parseToPercentage("0%") == 0.0);
+        assertTrue(ProgressRecord.parseToPercentage("20") == 20.0);
+
     }
 
     @Test
