@@ -55,7 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]"
-            + "[" + PREFIX_TIMESLOT + "TIMESLOT]"
+            + "[" + PREFIX_TIMESLOT + "TIMESLOTS]"
             + "[" + PREFIX_TRAINING_GOAL + "TRAINING GOAL] "
             + "[" + PREFIX_PROGRESS_RECORD + "PROGRESS_RECORD] "
             + "[" + PREFIX_INJURY_STATUS + "INJURY_STATUS] "

@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROGRESS_RECORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMESLOT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRAINING_GOAL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRAINING_GOAL_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -32,7 +33,8 @@ public class PersonTest {
         // same phone, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTrainingGoal(VALID_TRAINING_GOAL_BOB)
-                .withAvailability(VALID_AVAILABILITY_BOB).build();
+                .withAvailability(VALID_AVAILABILITY_BOB).withTimeslots(VALID_TIMESLOT_BOB)
+                .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different phone, all other attributes same -> returns false
@@ -88,7 +90,11 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_AVAILABILITY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different timeslot -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_TIMESLOT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different training goal -> returns false
         editedAlice = new PersonBuilder(ALICE).withTrainingGoal(VALID_TRAINING_GOAL_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
@@ -103,6 +109,7 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", injuryStatus=" + ALICE.getInjuryStatus() + ", trainingGoal=" + ALICE.getTrainingGoal()
                 + ", availability=" + ALICE.getAvailability()
+                + ", timeslots=" + ALICE.getTimeslots()
                 + ", skill=" + ALICE.getSkill()
                 + ", progressRecord=" + ALICE.getProgressRecord() + "}";
         assertEquals(expected, ALICE.toString());
