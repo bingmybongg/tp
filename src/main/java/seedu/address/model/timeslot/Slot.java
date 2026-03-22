@@ -1,5 +1,8 @@
 package seedu.address.model.timeslot;
 
+/**
+ * Represents the possible slots to allocate to a trainee.
+ */
 public enum Slot {
     SLOT_1("0800-0900"),
     SLOT_2("0900-1000"),
@@ -16,6 +19,11 @@ public enum Slot {
 
     private final String slot;
 
+    /**
+     * Returns a {@code Slot} object with the specified slot.
+     *
+     * @param slot Timing in "HHMM-HHMM" format.
+     */
     Slot(String slot) {
         this.slot = slot;
     }
@@ -25,6 +33,11 @@ public enum Slot {
         return slot;
     }
 
+    /**
+     * Returns a {@code Slot} object.
+     *
+     * @param input Either a slot number (1-12) or timing ("HHMM-HHMM").
+     */
     public static Slot toSlot(String input) {
         for (Slot s : Slot.values()) {
             String slotNumber = String.valueOf(s.ordinal() + 1);
