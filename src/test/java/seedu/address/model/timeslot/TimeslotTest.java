@@ -30,10 +30,13 @@ public class TimeslotTest {
         assertFalse(Timeslot.isValidTimeslot("mon: 1900-2000")); // space after colon
         assertFalse(Timeslot.isValidTimeslot("monday:1900-2000")); // days spelt in full
         assertFalse(Timeslot.isValidTimeslot("mon:2490-1680")); // invalid time
-        assertFalse(Timeslot.isValidTimeslot("mon:2100-1500")); // start time later than end time
-        assertFalse(Timeslot.isValidTimeslot("mon:2100-2100")); // same start and end time
+        assertFalse(Timeslot.isValidTimeslot("mon:1900-1500")); // start time later than end time
+        assertFalse(Timeslot.isValidTimeslot("mon:1800-1800")); // same start and end time
+        assertFalse(Timeslot.isValidTimeslot("mon:1800-2000")); // timings longer than an hour
+        assertFalse(Timeslot.isValidTimeslot("mon:1800-1900,11")); // duplicate times
         assertFalse(Timeslot.isValidTimeslot("mon:-1")); // invalid slot
         assertFalse(Timeslot.isValidTimeslot("mon:13")); // invalid slot
+        assertFalse(Timeslot.isValidTimeslot("mon:2,2;tue:4,4")); // duplicate slots
         assertFalse(Timeslot.isValidTimeslot("sun:")); // no slot chosen
         // overlapping times
         assertFalse(Timeslot.isValidTimeslot("mon:2100-2200,2030-2130"));
