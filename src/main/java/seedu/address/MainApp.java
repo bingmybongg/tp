@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
+import seedu.address.commons.util.StartupErrorMessage;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
@@ -86,8 +87,7 @@ public class MainApp extends Application {
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
-            String userMessage = createDataLoadErrorMessage(storage.getAddressBookFilePath(),
-                    getUserFacingErrorMessage(e));
+            String userMessage = StartupErrorMessage.build(storage.getAddressBookFilePath(), e);
             logger.warning(userMessage);
             startupErrorMessage = userMessage;
             initialData = new AddressBook();
@@ -188,28 +188,5 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
-    }
-
-    /**
-     * Builds the startup error message that explains which data file failed to load
-     * and shows the human-readable cause.
-     */
-    /**
-     * Builds the startup error message shown to the user when the data file cannot be loaded.
-     */
-    private String createDataLoadErrorMessage(Path dataFilePath, String message) {
-        return "WARNING: Data file at " + dataFilePath + " could not be loaded. Starting with an empty AddressBook.\n"
-                + "Reason: " + message;
-    }
-
-    /**
-     * Returns error message to be shown to user {@code e}.
-     */
-    private String getUserFacingErrorMessage(DataLoadingException e) {
-        Throwable cause = e.getCause();
-        if (cause != null && cause.getMessage() != null && !cause.getMessage().isBlank()) {
-            return cause.getMessage();
-        }
-        return e.getMessage();
     }
 }
