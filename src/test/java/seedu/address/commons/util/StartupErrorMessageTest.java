@@ -1,11 +1,10 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.util.StartupErrorMessage.WARNING_MESSAGE_FORMAT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import static seedu.address.commons.util.StartupErrorMessage.WARNING_MESSAGE_FORMAT;
 
 import org.junit.jupiter.api.Test;
 
