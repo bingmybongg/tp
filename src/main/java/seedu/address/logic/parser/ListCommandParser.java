@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INJURY_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS_RECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRAINING_GOAL;
 
 import java.util.ArrayList;
@@ -61,15 +61,15 @@ public class ListCommandParser implements Parser<ListCommand> {
         // against all known prefixes and checking if any unknown ones have values
         ArgumentMultimap allPrefixesMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SKILL, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_AVAILABILITY,
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TIMESLOT,
                         PREFIX_TRAINING_GOAL, PREFIX_PROGRESS_RECORD, PREFIX_INJURY_STATUS);
 
         if (allPrefixesMap.getValue(PREFIX_NAME).isPresent()
                 || allPrefixesMap.getValue(PREFIX_PHONE).isPresent()
                 || allPrefixesMap.getValue(PREFIX_EMAIL).isPresent()
                 || allPrefixesMap.getValue(PREFIX_ADDRESS).isPresent()
-                || allPrefixesMap.getValue(PREFIX_AVAILABILITY).isPresent()
                 || allPrefixesMap.getValue(PREFIX_TRAINING_GOAL).isPresent()
+                || !allPrefixesMap.getAllValues(PREFIX_TIMESLOT).isEmpty()
                 || allPrefixesMap.getValue(PREFIX_PROGRESS_RECORD).isPresent()
                 || allPrefixesMap.getValue(PREFIX_INJURY_STATUS).isPresent()
                 || !argMultimap.getPreamble().isEmpty()) {

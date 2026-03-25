@@ -132,8 +132,8 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_availabilityPrefix_throwsParseException() {
-        assertParseFailure(parser, " av/mon:0900-1000",
+    public void parse_timeslotPrefix_throwsParseException() {
+        assertParseFailure(parser, " ts/mon:0900-1000",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
@@ -182,8 +182,8 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_skillWithAvailabilityPrefix_throwsParseException() {
-        assertParseFailure(parser, " s/beginner av/mon:0900-1000",
+    public void parse_skillWithTimeslotPrefix_throwsParseException() {
+        assertParseFailure(parser, " s/beginner ts/mon:0900-1000",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
@@ -228,7 +228,7 @@ public class ListCommandParserTest {
     @Test
     public void parse_allInvalidPrefixes_throwsParseException() {
         assertParseFailure(parser, " n/John p/12345678 e/john@example.com "
-                        + "a/123 Street av/Monday t/marathon pr/90% i/brain dead",
+                        + "a/123 Street ts/Mon:1 t/marathon pr/90% i/brain dead",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
