@@ -12,11 +12,11 @@ participant "MainWindow" as MainWindow UI_COLOR_T2
 participant "ResultDisplay" as ResultDisplay UI_COLOR_T1
 participant "StartupErrorMessage" as StartupErrorMessage STORAGE_COLOR_T1
 
-MainApp -> StorageManager : initModelManager() / readAddressBook()
+MainApp -> StorageManager : readAddressBook()
 activate StorageManager
 StorageManager -> JsonStorage : readAddressBook(filePath)
 activate JsonStorage
-JsonStorage -> JsonSerializable : readJsonFile() / toModelType()
+JsonStorage -> JsonSerializable : toModelType()
 activate JsonSerializable
 JsonSerializable -> JsonAdaptedPerson : toModelType() (per entry)
 activate JsonAdaptedPerson
