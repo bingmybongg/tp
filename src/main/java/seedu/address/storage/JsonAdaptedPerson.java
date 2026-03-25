@@ -234,7 +234,7 @@ class JsonAdaptedPerson {
      * Formats a constraint failure message that includes the offending field and value.
      */
     private static String formatInvalidFieldMessage(String fieldName, String expected, String actualValue) {
-        return String.format("Invalid value for %s: \"%s\". Expected: %s", fieldName, actualValue, expected);
+        return String.format("Invalid value for %s: \"%s\". %s", fieldName, actualValue, expected);
     }
 
 }

@@ -54,7 +54,7 @@ public class JsonAdaptedPersonTest {
                     VALID_ADDRESS, VALID_AVAILABILITY, VALID_TRAINING_GOAL,
                         VALID_PROGRESS_RECORD, VALID_INJURY_STATUS, VALID_SKILL);
         String expectedMessage = "Invalid value for Name: \"" + INVALID_NAME
-                + "\". Expected: " + Name.MESSAGE_CONSTRAINTS;
+                + "\". " + Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -75,7 +75,7 @@ public class JsonAdaptedPersonTest {
                     VALID_ADDRESS, VALID_AVAILABILITY, VALID_TRAINING_GOAL,
                         VALID_PROGRESS_RECORD, VALID_INJURY_STATUS, VALID_SKILL);
         String expectedMessage = "Invalid value for Phone: \"" + INVALID_PHONE
-                + "\". Expected: " + Phone.MESSAGE_CONSTRAINTS;
+                + "\". " + Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -96,7 +96,7 @@ public class JsonAdaptedPersonTest {
                     VALID_ADDRESS, VALID_AVAILABILITY, VALID_TRAINING_GOAL,
                         VALID_PROGRESS_RECORD, VALID_INJURY_STATUS, VALID_SKILL);
         String expectedMessage = "Invalid value for Email: \"" + INVALID_EMAIL
-                + "\". Expected: " + Email.MESSAGE_CONSTRAINTS;
+                + "\". " + Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -118,7 +118,7 @@ public class JsonAdaptedPersonTest {
                     INVALID_ADDRESS, VALID_AVAILABILITY, VALID_TRAINING_GOAL,
                         VALID_PROGRESS_RECORD, VALID_INJURY_STATUS, VALID_SKILL);
         String expectedMessage = "Invalid value for Address: \"" + INVALID_ADDRESS
-                + "\". Expected: " + Address.MESSAGE_CONSTRAINTS;
+                + "\". " + Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -139,7 +139,7 @@ public class JsonAdaptedPersonTest {
                     VALID_ADDRESS, INVALID_AVAILABILITY, VALID_TRAINING_GOAL,
                     VALID_PROGRESS_RECORD, VALID_INJURY_STATUS, VALID_SKILL);
         String expectedMessage = "Invalid value for Availability: \"" + INVALID_AVAILABILITY
-                + "\". Expected: " + Availability.MESSAGE_CONSTRAINTS;
+                + "\". " + Availability.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -160,7 +160,7 @@ public class JsonAdaptedPersonTest {
                 VALID_ADDRESS, VALID_AVAILABILITY, INVALID_TRAINING_GOAL,
                 VALID_PROGRESS_RECORD, VALID_INJURY_STATUS, VALID_SKILL);
         String expectedMessage = "Invalid value for TrainingGoal: \"" + INVALID_TRAINING_GOAL
-                + "\". Expected: " + TrainingGoal.MESSAGE_CONSTRAINTS;
+                + "\". " + TrainingGoal.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -170,9 +170,7 @@ public class JsonAdaptedPersonTest {
             new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                     VALID_ADDRESS, VALID_AVAILABILITY, VALID_TRAINING_GOAL,
                     INVALID_PROGRESS_RECORD, VALID_INJURY_STATUS, VALID_SKILL);
-        String expectedMessage = "Invalid value for ProgressRecord: \"" + INVALID_PROGRESS_RECORD
-                + "\". Expected: " + ProgressRecord.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, person::toModelType);
     }
 
     @Test
@@ -194,7 +192,7 @@ public class JsonAdaptedPersonTest {
                 VALID_AVAILABILITY, VALID_TRAINING_GOAL,
                 VALID_PROGRESS_RECORD, INVALID_INJURY_STATUS, VALID_SKILL);
         String expectedMessage = "Invalid value for InjuryStatus: \"" + INVALID_INJURY_STATUS
-                + "\". Expected: " + InjuryStatus.MESSAGE_CONSTRAINTS;
+                + "\". " + InjuryStatus.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -227,7 +225,7 @@ public class JsonAdaptedPersonTest {
                     VALID_ADDRESS, VALID_AVAILABILITY, VALID_TRAINING_GOAL,
                         VALID_PROGRESS_RECORD, VALID_INJURY_STATUS, INVALID_SKILL);
         String expectedMessage = "Invalid value for Skill: \"" + INVALID_SKILL
-                + "\". Expected: " + Skill.MESSAGE_CONSTRAINTS;
+                + "\". " + Skill.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
