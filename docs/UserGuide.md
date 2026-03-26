@@ -31,7 +31,7 @@ PTcoach is a **desktop app for managing client contacts, optimized for use via a
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ts/mon:1 t/run 100km` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Run 100km ts/mon:1,3,5;tue:7 i/Healthy s/Beginner pr/50` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -46,6 +46,14 @@ PTcoach is a **desktop app for managing client contacts, optimized for use via a
 ## Features
 
 <box type="info" seamless>
+
+### Command History Navigation
+
+PTCoach supports command history navigation similar to Unix command-line systems.
+
+* Press the **Up** arrow key to view previously entered commands.
+* Press the **Down** arrow key to move towards more recent commands.
+* This allows users to quickly reuse or edit past commands without retyping them.
 
 **Notes about the command format:**<br>
 
@@ -103,15 +111,48 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ts/TIMESLOT t/TRAINING_GOAL
 * Cannot be blank
 * This field is mandatory
 
+**Timeslot (`ts/`):**
+* Represents the weekly training schedule of the client (e.g. `mon:1,3,5;tue:7`)
+* Must follow the format: 'day:slot[,slot...];day:slot'
+* Days must be a 3-letter abbreviations (`mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`)
+* Slots are integers from **1 to 12**, each representing a fixed 1-hour time period.
+  * eg. Slot 1 -> 0800 - 0900 and Slot 12 -> 1900 - 2000
+* Multiple slots for the same day are separated by commas
+* Multiple days are separated by semicolons
+* No duplicate slots allowed for the same day
+* Cannot be blank
+* This field is mandatory - every client must have a timeslot.
+
 **Training Goal (`t/`):**
 * Represents the fitness or performance goal of the client (e.g. `run 50km`, `lift 100kg`)
 * Accepts any alphanumeric characters and spaces
 * Cannot be blank
 * This field is mandatory — every client must have a training goal specified
 
+**Progress Record (`pr/`):**
+* Represents the client’s training progress as a percentage (e.g. `50`, `100`)
+* Accepts integers from `0 to 100`
+* Must be a whole number (no symbols such as `%` or fractions)
+* Cannot be blank if provided
+* This field is optional
+
+**Injury Status (`i/`):**
+* Represents any injury or physical limitation of the client (e.g. `L4/L5 disc herniation`, `ACL tore`)
+* Accepts any alphanumeric characters and spaces
+* Cannot be blank if provided
+* This field is optional
+
+**Skill Level (`s/`):**
+* Represents the client’s current fitness or skill level
+* Must be one of the following values: `beginner`, `intermediate`, `expert`
+* Input is case-insensitive (e.g. `Beginner`, `BEGINNER` are accepted)
+* Will be stored in capitalized form (e.g. `Beginner`)
+* Cannot be blank if provided
+* This field is optional
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ts/mon:1,2 t/run 50km i/shoulder dislocate`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 ts/mon:1,3;sat:2,4 t/lift 100kg`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Run 50km ts/mon:1,2 i/Shoulder dislocation`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Newgate Prison t/Lift 100kg ts/mon:1,3;sat:2,4`
 
 ### Listing all persons : `list`
 
@@ -161,10 +202,39 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ts/TIMESLOT] [t/TR
 * Accepts any non-blank characters
 * Cannot be blank
 
+**Timeslot (`ts/`):**
+* Represents the weekly training schedule of the client (e.g. `mon:1,3,5;tue:7`)
+* Must follow the format: 'day:slot[,slot...];day:slot'
+* Days must be a 3-letter abbreviations (`mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`)
+* Slots are integers from **1 to 12**, each representing a fixed 1-hour time period.
+    * eg. Slot 1 -> 0800 - 0900 and Slot 12 -> 1900 - 2000
+* Multiple slots for the same day are separated by commas
+* Multiple days are separated by semicolons
+* No duplicate slots allowed for the same day
+* Cannot be blank
+
 **Training Goal (`t/`):**
 * Represents the fitness or performance goal of the client (e.g. `run 50km`, `lift 100kg`)
 * Accepts any alphanumeric characters and spaces
 * Cannot be blank
+
+**Progress Record (`pr/`):**
+* Represents the client’s training progress as a percentage (e.g. `50`, `100`)
+* Accepts integers from `0 to 100`
+* Must be a whole number (no symbols such as `%` or fractions)
+* Cannot be blank if provided
+
+**Injury Status (`i/`):**
+* Represents any injury or physical limitation of the client (e.g. `L4/L5 disc herniation`, `ACL tore`)
+* Accepts any alphanumeric characters and spaces
+* Cannot be blank if provided
+
+**Skill Level (`s/`):**
+* Represents the client’s current fitness or skill level (e.g. `Beginner`)
+* Must be one of the following values: `beginner`, `intermediate`, `expert`
+* Input is case-insensitive (e.g. `Beginner`, `BEGINNER` are accepted)
+* Will be stored in capitalized form (e.g. `Beginner`)
+* Cannot be blank if provided
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -253,7 +323,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ts/TIMESLOT t/TRAINING_GOAL [i/INJURY_STATUS] [s/SKILL] [pr/PROGRESS_RECORD]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/run 100km av/sat:1000-1100`
+**Add**    |`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TRAINING_GOAL ts/TIMESLOT [i/INJURY_STATUS] [s/SKILL] [pr/PROGRESS_RECORD]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 ts/sat:2,3 t/Run 100km`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ts/TIMESLOT] [t/TRAINING GOAL] [pr/PROGRESS_RECORD] [i/INJURY_STATUS] [s/SKILL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
