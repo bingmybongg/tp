@@ -543,7 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - Contact Number  
   - Address  
   - Availability  
-  - Training slot
+  - Timeslot
   - Training Goals  
   - Skill Level*  
   - Progress Record*  
@@ -628,7 +628,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is added. An error message is shown because the email is invalid
    
    3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street t/Run 50km ts/mon:13`<br>
-      Expected: No person is added. An error message is shown because the training slot is invalid
+      Expected: No person is added. An error message is shown because the timeslot is invalid
 
 5. Adding a person with missing compulsory fields
 
@@ -654,6 +654,9 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `list s/expert`<br>
       Expected: Only persons with skill level `Expert` are shown.
+   
+   4. Test case: `list s/beginner s/intermediate`
+      Expected: Only persons with skill level `Beginner` and `Intermediate` are shown.
 
 3. Listing persons with no matching filter
 
@@ -663,7 +666,10 @@ testers are expected to do more *exploratory* testing.
 4. Listing persons with invalid filter
 
    1. Test case: `list s/advanced`
-      Expected: The command is accepted. If no client has the skill level `Advanced`, an empty list is shown.
+      Expected: The command is accepted but no client has the skill level `Advanced`. Hence, an empty list is shown.
+   
+   2. Test case: `list s/beginer`
+      Expected: The command is accepted but no client has the skill level `beginer`. Hence, an empty list is shown. (note the beginer here has a typo error)
 
 5. Listing persons with missing filter parameter
 
@@ -701,7 +707,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is edited. An error message is shown because phone number is invalid.
 
    2. Test case: `edit 1 ts/mon:13`<br>
-      Expected: No person is edited. An error message is shown because training slot is invalid.
+      Expected: No person is edited. An error message is shown because Timeslot is invalid.
 
    3. Test case: `edit 1 s/advanced`<br>
       Expected: No person is edited. An error message is shown because skill is invalid.

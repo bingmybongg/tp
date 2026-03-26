@@ -111,7 +111,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ts/TIMESLOT t/TRAINING_GOAL
 * Cannot be blank
 * This field is mandatory
 
-**Training Slot (`ts/`):**
+**Timeslot (`ts/`):**
 * Represents the weekly training schedule of the client (e.g. `mon:1,3,5;tue:7`)
 * Must follow the format: 'day:slot[,slot...];day:slot'
 * Days must be a 3-letter abbreviations (`mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`)
@@ -121,7 +121,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ts/TIMESLOT t/TRAINING_GOAL
 * Multiple days are separated by semicolons
 * No duplicate slots allowed for the same day
 * Cannot be blank
-* This field is mandatory - every client must have a training slot
+* This field is mandatory - every client must have a timeslot.
 
 **Training Goal (`t/`):**
 * Represents the fitness or performance goal of the client (e.g. `run 50km`, `lift 100kg`)
@@ -202,7 +202,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ts/TIMESLOT] [t/TR
 * Accepts any non-blank characters
 * Cannot be blank
 
-**Training Slot (`ts/`):**
+**Timeslot (`ts/`):**
 * Represents the weekly training schedule of the client (e.g. `mon:1,3,5;tue:7`)
 * Must follow the format: 'day:slot[,slot...];day:slot'
 * Days must be a 3-letter abbreviations (`mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`)
