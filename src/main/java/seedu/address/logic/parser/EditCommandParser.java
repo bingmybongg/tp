@@ -101,9 +101,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (timeslots.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> timeslotSet = timeslots.size() == 1 && timeslots.contains("")
-                ? Collections.emptySet() : timeslots;
-        return Optional.of(ParserUtil.parseTimeslots(timeslotSet));
+        if (timeslots.size() == 1 && timeslots.contains("")) {
+            throw new ParseException(Timeslot.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(ParserUtil.parseTimeslots(timeslots));
     }
 
 }
