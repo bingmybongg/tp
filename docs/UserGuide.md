@@ -186,10 +186,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ts/TIMESLOT] [t/TR
 * Represents the full name of the client (e.g. `John Doe`)
 * Accepts alphabetical characters and spaces only — no numbers or symbols
 * Cannot be blank
+* Max length is 100 characters; names longer than 50 characters will be truncated in the display
 
 **Phone Number (`p/`):**
 * Represents the contact number of the client (e.g. `98765432`)
-* Accepts numerals only — no spaces, dashes, or other characters
+* Accepts numerals only — no spaces, dashes, or other ch* Max length is 100 characters, however, the name will be truncated to 50 characters in the displayaracters
 * Must be at least 3 digits long
 
 **Email (`e/`):**
