@@ -35,8 +35,8 @@ public class ListCommandParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"   s/intermediate   ", " s/intermediate"})
-    public void parse_validSkillFilterWithWhitespace_returnsListCommand(String input) {
+    @ValueSource(strings = {"   s/intermediate   ", " s/intermediate", " s/iNTerMedIate", " s/Intermediate  "})
+    public void parse_validSkill_returnsListCommand(String input) {
         ListCommand expectedCommand = new ListCommand(List.of(new Skill("intermediate")));
         assertParseSuccess(parser, input, expectedCommand);
     }
