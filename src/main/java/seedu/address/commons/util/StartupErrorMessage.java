@@ -25,6 +25,9 @@ public final class StartupErrorMessage {
         return warning + formatBackupPath(exception);
     }
 
+    /**
+     * Appends information about where the corrupted data was backed up, if available.
+     */
     private static String formatBackupPath(DataLoadingException exception) {
         if (exception == null) {
             return "";

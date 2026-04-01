@@ -83,6 +83,11 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
 
+    /**
+     * Copies the corrupted JSON file next to the original with a timestamp suffix.
+     *
+     * @return the path to the backup copy, or {@code null} if the copy failed.
+     */
     private Path backupCorruptedAddressBook(Path filePath) {
         if (filePath == null || !Files.exists(filePath)) {
             return null;
@@ -99,11 +104,17 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         return backupPath;
     }
 
+    /**
+     * Builds a sibling path for the backup by inserting a timestamp before the file extension.
+     */
     private Path buildTimestampedBackupPath(Path originalPath) {
         String backupFileName = timestampedFileName(originalPath.getFileName().toString());
         return originalPath.resolveSibling(backupFileName);
     }
 
+    /**
+     * Returns {@code fileName} with a timestamp inserted before its extension (or at the end if none).
+     */
     private String timestampedFileName(String fileName) {
         String timestamp = LocalDateTime.now().format(BACKUP_TIMESTAMP_FORMAT);
         String[] parts = fileName.split("\\.", 2);
