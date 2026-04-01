@@ -24,18 +24,33 @@ public class NameTest {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
-        // invalid name
+        // invalid names
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("^")); // non-alphabetic character
+        assertFalse(Name.isValidName("peter*")); // contains symbol
+        assertFalse(Name.isValidName("12345")); // numbers only (no longer valid)
+        assertFalse(Name.isValidName("peter the 2nd")); // contains number
+        assertFalse(Name.isValidName("-John")); // starts with hyphen
+        assertFalse(Name.isValidName("'John")); // starts with apostrophe
+        assertFalse(Name.isValidName(" John")); // starts with space
+        assertFalse(Name.isValidName("A" + "a".repeat(100))); // 101 characters (too long)
+        assertFalse(Name.isValidName("A" + "A".repeat(100))); // 101 characters (too long)
+        assertFalse(Name.isValidName("a" + "A".repeat(100))); // 101 characters (too long)
+        assertFalse(Name.isValidName("a" + "a".repeat(100))); // 101 characters (too long)
 
-        // valid name
+        // valid names
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("Mary-Jane")); // hyphenated name
+        assertTrue(Name.isValidName("O'Brien")); // apostrophe name
+        assertTrue(Name.isValidName("José")); // accented characters
+        assertTrue(Name.isValidName("David Roger Jackson Ray")); // long name
+        assertTrue(Name.isValidName("A" + "a".repeat(99))); // exactly 100 characters (boundary)
+        assertTrue(Name.isValidName("A" + "A".repeat(99))); // exactly 100 characters (boundary)
+        assertTrue(Name.isValidName("a" + "A".repeat(99))); // exactly 100 characters (boundary)
+        assertTrue(Name.isValidName("a" + "a".repeat(99))); // exactly 100 characters (boundary)
+
     }
 
     @Test
