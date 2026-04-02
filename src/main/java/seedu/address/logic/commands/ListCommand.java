@@ -65,7 +65,7 @@ public class ListCommand extends Command {
                             person.getSkill().value.equalsIgnoreCase(skill.value)));
             String skillNames = skills.stream()
                     .map(s -> s.value)
-                    .collect(java.util.stream.Collectors.joining(", "));
+                    .reduce((x, y)-> x + ", " + y).get();
             return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS_FILTERED,
                     skillNames,
                     model.getFilteredPersonList().size())
