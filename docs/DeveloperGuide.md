@@ -158,6 +158,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Command History Navigation
+
+#### Implementation
+
+The Command History navigation mechanism is facilitated by `CommandHistory`. It is a class on its own and is stored as a singleton within `CommandBox`. Additionally, it implements the following operations:
+* `CommandHistory#navigateUp()` -- Navigates to the previous command in the history
+* `CommandHistory#navigateDown()` -- Navigates to the next command in the history
+* `CommandHistory#addCommand()` -- Adds a command to the history and resets the navigation pointer to the end of the list.
+
+Given below is an example usage scenario and how the command history navigation works at each step.
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
