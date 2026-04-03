@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Skill;
 
@@ -35,8 +36,10 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label address;
+//    @FXML
+//    private FlowPane timeslots;
     @FXML
-    private FlowPane timeslots;
+    private HBox timeslots;
     @FXML
     private Label trainingGoal;
     @FXML
@@ -65,6 +68,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTimeslots().stream().sorted()
                 .forEach(timeslot -> {
                     Label timeslotLabel = new Label(timeslot.toString());
+//                    timeslotLabel.maxWidthProperty().bind(cardPane.widthProperty().subtract(20));
+//                    timeslotLabel.setWrapText(true);
+//                    timeslotLabel.setMinHeight(Region.USE_PREF_SIZE);
                     timeslotLabel.getStyleClass().add("timeslot-label");
                     timeslots.getChildren().add(timeslotLabel);
                 });
