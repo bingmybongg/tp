@@ -41,14 +41,20 @@ public class TrainingGoalTest {
         assertFalse(TrainingGoal.isValidTrainingGoal("ab/something")); // two letter flag-like pattern
         assertFalse(TrainingGoal.isValidTrainingGoal("run 50km x/weekly")); // flag-like pattern in middle
 
-        // BVA: max length
+        // EP: valid length
         assertTrue(TrainingGoal.isValidTrainingGoal("a".repeat(200))); // exactly 200 characters (max boundary)
+        assertTrue(TrainingGoal.isValidTrainingGoal("a")); // 1 character (min boundary)
+
+        // EP: invalid length
         assertFalse(TrainingGoal.isValidTrainingGoal("a".repeat(201))); // 201 characters (too long)
 
-        // EP: valid training goals
-        assertTrue(TrainingGoal.isValidTrainingGoal("a")); // single character
+        // EP: training goal with alphanumeric
         assertTrue(TrainingGoal.isValidTrainingGoal("run 50km")); // typical goal
+
+        // EP: training goal with alphanumeric and symbols
         assertTrue(TrainingGoal.isValidTrainingGoal("lift 100kg (bench press)")); // with symbols
+
+        // EP: training goal with alphanumeric and semi-flag-like pattern
         assertTrue(TrainingGoal.isValidTrainingGoal("run 5k/day")); // number + letters before slash allowed
         assertTrue(TrainingGoal.isValidTrainingGoal("run 50/100km")); // numbers before slash allowed
     }
