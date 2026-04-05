@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -46,13 +45,10 @@
         </VBox.margin>
       </Region>
 
-      <ScrollPane vbarPolicy="NEVER" hbarPolicy="NEVER" fitToHeight="true"
+      <ScrollPane vbarPolicy="NEVER" hbarPolicy="AS_NEEDED" fitToHeight="true" styleClass="hover-scroll"
                   style="-fx-background-color: transparent; -fx-background: transparent;">
-<!--        <FlowPane fx:id="timeslots" hgap="5" vgap="5" />-->
         <HBox fx:id="timeslots" spacing="5" />
       </ScrollPane>
-<!--      <Label fx:id="timeslots" wrapText="true" />-->
-<!--      <VBox fx:id="timeslots" spacing="4" />-->
 
       <VBox spacing="4">
         <Label fx:id="trainingGoal" styleClass="trainingGoal_label" text="\$trainingGoal" />
