@@ -162,14 +162,24 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The Command History navigation mechanism is facilitated by `CommandHistory`. It is a class on its own and is stored as a singleton within `CommandBox`. Additionally, it implements the following operations:
+The Command History navigation is facilitated by `CommandHistory`. It is a class on its own and is stored as a singleton within `CommandBox`. Additionally, it implements the following operations:
 * `CommandHistory#navigateUp()` -- Navigates to the previous command in the history
 * `CommandHistory#navigateDown()` -- Navigates to the next command in the history
 * `CommandHistory#addCommand()` -- Adds a command to the history and resets the navigation pointer to the end of the list.
 
 Given below is an example usage scenario and how the command history navigation works at each step.
 
+Step 1. The user launches the application. For the purpose of this example, assume the address book is empty.
 
+<puml src="diagrams/CommandHistoryState0.puml" alt="CommandHistoryState0" />
+
+Step 2. The user enters 3 commands in order: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Run 50km ts/mon:1,2`, `list`, `edit 1 n/Bob`.
+
+<puml src="diagrams/CommandHistoryState1.puml" alt="CommandHistoryState1" />
+
+Step 3. The user presses `Up` key, to retrieve back the past submitted command.
+
+<puml src="diagrams/CommandHistoryState2.puml" alt="CommandHistoryState2" />
 
 ### \[Proposed\] Undo/redo feature
 
