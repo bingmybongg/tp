@@ -29,7 +29,7 @@ class StartupErrorMessageTest {
                 DATA_FILE_PATH, Optional.of(INVALID_FILE_PATH), Optional.empty());
 
         String expected = String.format(
-                "Invalid entries were found in %s.%nWrong entries saved to %s",
+                "Invalid entries were found in %s.\nWrong entries saved to %s",
                 DATA_FILE_PATH, INVALID_FILE_PATH);
 
         assertEquals(expected, actual);
@@ -43,9 +43,9 @@ class StartupErrorMessageTest {
                 DATA_FILE_PATH, Optional.empty(), Optional.of("Permission denied"));
 
         String expected = String.format(
-                "Invalid entries were found in %s but saving them failed.%n"
+                "Invalid entries were found in %s but saving them failed: %s.\n"
                         + "Check the logs for more information.",
-                DATA_FILE_PATH);
+                DATA_FILE_PATH, "Permission denied");
 
         assertEquals(expected, actual);
     }
@@ -71,9 +71,9 @@ class StartupErrorMessageTest {
                 DATA_FILE_PATH, Optional.of(INVALID_FILE_PATH), Optional.of("Permission denied"));
 
         String expected = String.format(
-                "Invalid entries were found in %s but saving them failed.%n"
+                "Invalid entries were found in %s but saving them failed: %s.\n"
                         + "Check the logs for more information.",
-                DATA_FILE_PATH);
+                DATA_FILE_PATH, "Permission denied");
 
         assertEquals(expected, actual);
     }
