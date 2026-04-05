@@ -51,7 +51,7 @@
       <VBox spacing="4">
         <Label fx:id="trainingGoal" styleClass="trainingGoal_label" text="\$trainingGoal" />
         <Label fx:id="progressRecord" styleClass="progress_label" text="\$progressRecord" />
-        <Label fx:id="injuryStatus" styleClass="injury_label" text="\$injuryStatus" />
+        <Label fx:id="injuryStatus" styleClass="injury_label" text="\$injuryStatus" wrapText="true"/>
       </VBox>
     </VBox>
   </GridPane>
