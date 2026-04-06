@@ -1,5 +1,6 @@
 @startuml
 skinparam shadowing false
+
 hide footbox
 
 title Sequence Diagram: Navigate Up Arrow
@@ -22,9 +23,9 @@ alt history is empty
 else \t\t\t [current index <= 0
     CommandHistory --> CommandBox : first command entered
 else \t\t\t [normal navigation
-    CommandHistory --> CommandBox : immediate previous command entered
-end
+    CommandHistory --> CommandBox : previous command entered
 deactivate CommandHistory
+end
 CommandBox --> CommandBox
 deactivate CommandBox
 

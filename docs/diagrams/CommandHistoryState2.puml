@@ -6,10 +6,10 @@ skinparam ClassBackgroundColor #FFFFAA
 
 show member
 hide empty member
-title "Initial State"
+title "Going back 1 command"
 Class "<u>:CommandBox" as CommandBox
 Class "<u>:CommandHistory" as CommandHistory {
-    commandHistory = ["add n/John Doe p/98765432 \n\te/johnd@example.com \n\ta/John street, block 123, #01-01\n\t t/Run 50km ts/mon:1,2", \n"list"\n"edit 1 n/Bob"]
+    commandHistory = [\n\t"help",\n\t"list", \n\t"<b>list s/advancd</b>"]
     current = 2
 }
 CommandBox -- CommandHistory

@@ -9,8 +9,8 @@ hide empty member
 title "Final State"
 Class "<u>:CommandBox" as CommandBox
 Class "<u>:CommandHistory" as CommandHistory {
-    commandHistory = [\n\t"help",\n\t"list", \n\t"list s/advancd",\n\t"list s/advanced"]
-    current = 4
+    commandHistory = [\n\t"help",\n\t"<b>list</b>", \n\t"list s/advancd",\n\t"list s/advanced"]
+    current = 1
 }
 CommandBox -- CommandHistory
 @enduml

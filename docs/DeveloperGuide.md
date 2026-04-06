@@ -173,15 +173,14 @@ Step 1. The user launches the application. For the purpose of this example, assu
 
 <puml src="diagrams/CommandHistoryState0.puml" alt="CommandHistoryState0" />
 
-Step 2. The user enters 3 commands in order: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Run 50km ts/mon:1,2`, `list`, `edit 1 n/Bob`.
-
+Step 2. The user enters 3 commands in order: `help`, `list`, `list s/advancd`,
 <puml src="diagrams/CommandHistoryState1.puml" alt="CommandHistoryState1" />
 
-Step 3. The user presses `Up` key, to retrieve back the past submitted command (`edit n\Bob`).
+Step 3. The user presses `Up` key, to retrieve back the past submitted command (`list s/advancd`).
 
 <puml src="diagrams/CommandHistoryState2.puml" alt="CommandHistoryState2" />
 
-Step 4. The user resubmits a new command (`edit 1 n/Bob Tan`).
+Step 4. The user resubmits a new command (`list s/advanced`).
 
 <puml src="diagrams/CommandHistoryState3.puml" alt="CommandHistoryState3" />
 
@@ -189,6 +188,25 @@ Step 4. The user resubmits a new command (`edit 1 n/Bob Tan`).
 The following sequence diagram shows the relation between `CommandHistory` and `CommandBox`
 
 <puml src="diagrams/CommandHistorySequenceDiagram.puml" alt="CommandHistorySequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The `[` at the start of the alt conditions are due to PlantUML limitations, please ignore the symbol.
+
+</box>
+
+Similarly, navigate down works the opposite of navigate up, going forwards in the command history.
+
+Step 5. The user wants to find the list command, but overshoots it by an extra key press, leading it to `help`.
+
+<puml src="diagrams/CommandHistoryState4.puml" alt="CommandHistoryState4" />
+
+Step 6. The user presses `Down` key once, and `list` is shown in the Command text field.
+
+<puml src="diagrams/CommandHistoryState5.puml" alt="CommandHistoryState5" />
+
+Step 7. After executing the command, `list` is appended to the command history and current is updated to the size of `Command History`
+<puml src="diagrams/CommandHistoryState6.puml" alt="CommandHistoryState6" />
 
 The following activity diagram summarizes what happens when users want to navigate the command history of their current session.
 
