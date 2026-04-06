@@ -96,7 +96,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ts/TIMESLOT t/TRAINING_GOAL
 **Phone Number (`p/`):**
 * Represents the contact number of the client (e.g. `98765432`)
 * Accepts numerals only — no spaces, dashes, or other characters
-* Must be at least 3 digits long
+* Must be between 3 and 15 digits long
 * This field is mandatory
 
 **Email (`e/`):**
@@ -126,7 +126,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ts/TIMESLOT t/TRAINING_GOAL
 **Training Goal (`t/`):**
 * Represents the fitness or performance goal of the client (e.g. `run 50km`, `lift 100kg`)
 * Accepts any alphanumeric characters and spaces
+* Must not contain substrings that resemble command prefixes (e.g. `a/`, `p/`, `i/`, `t/`, `ts/`, `s/`, `pr/`)
 * Cannot be blank
+* The max length for the training goal is 200 characters
 * This field is mandatory — every client must have a training goal specified
 
 **Progress Record (`pr/`):**
@@ -139,6 +141,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ts/TIMESLOT t/TRAINING_GOAL
 **Injury Status (`i/`):**
 * Represents any injury or physical limitation of the client (e.g. `L4/L5 disc herniation`, `ACL tore`)
 * Accepts any alphanumeric characters and spaces
+* Must not contain substrings that resemble command prefixes (e.g. `a/`, `p/`, `i/`, `t/`, `ts/`, `s/`, `pr/`)
+* Must not exceed 300 characters
 * Cannot be blank if provided
 * This field is optional
 
@@ -161,11 +165,11 @@ Shows a list of all persons in the address book, with an optional skill filter.
 Format: `list [s/SKILL]`
 
 **Skill Filter (`s/`):**
-* Filters the list to show only clients with a matching skill level (e.g. `beginner`, `intermediate`, `expert`)
-* Accepts any non-blank alphanumeric value — not restricted to predefined skill levels
-* Multiple skill filters can be provided to match clients with any of the specified skill levels
-* If no skill filter is provided, all persons are listed
-* Note: Typos in the skill filter (e.g. `list s/begniner`) will not result in an error, but will return an empty list since no clients match the misspelled value
+* Filters the list to show only clients with a matching skill level: `Beginner`, `Intermediate`, or `Expert`
+* Skill level is case-insensitive (e.g. `s/expert`, `s/EXPERT`, and `s/Expert` all work)
+* Multiple skill filters can be provided to match clients with any of the specified skill levels (e.g. `s/beginner s/expert`)
+* If no skill filter is provided, all clients are listed
+* Invalid skill levels (e.g. `list s/advanced`) will result in an error
 
 Examples:
 * `list` — lists all persons
@@ -190,7 +194,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ts/TIMESLOT] [t/TR
 **Phone Number (`p/`):**
 * Represents the contact number of the client (e.g. `98765432`)
 * Accepts numerals only — no spaces, dashes, or other characters
-* Must be at least 3 digits long
+* Must be between 3 and 15 digits long
 
 **Email (`e/`):**
 * Represents the email address of the client (e.g. `johnd@example.com`)
@@ -217,7 +221,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ts/TIMESLOT] [t/TR
 **Training Goal (`t/`):**
 * Represents the fitness or performance goal of the client (e.g. `run 50km`, `lift 100kg`)
 * Accepts any alphanumeric characters and spaces
+* Must not contain substrings that resemble command prefixes (e.g. `a/`, `p/`, `i/`, `t/`, `ts/`, `s/`, `pr/`)
 * Cannot be blank
+* The max length for the training goal is 200 characters
 
 **Progress Record (`pr/`):**
 * Represents the client’s training progress as a percentage (e.g. `50%`, `100%`)
@@ -228,6 +234,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ts/TIMESLOT] [t/TR
 **Injury Status (`i/`):**
 * Represents any injury or physical limitation of the client (e.g. `L4/L5 disc herniation`, `ACL tore`)
 * Accepts any alphanumeric characters and spaces
+* Must not contain substrings that resemble command prefixes (e.g. `a/`, `p/`, `i/`, `t/`, `ts/`, `s/`, `pr/`)
+* Must not exceed 300 characters
 * Cannot be blank if provided
 
 **Skill Level (`s/`):**
@@ -287,29 +295,29 @@ Format: `exit`
 
 ### Saving the data
 
-PTcoach data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+PTcoach saves to disk automatically every time a command runs. There is no need to save manually. 
+
+The live data reside in `[JAR file location]/data/addressbook.json`.
 
 ### Editing the data file
 
-PTcoach data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Advanced users are welcome to update data directly by editing `[JAR file location]/data/addressbook.json`.
 
 <box type="warning" seamless>
-
 **Caution:**
-If your changes to the data file makes its format invalid, PTcoach will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the PTcoach to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If the data file contains invalid entries, PTcoach will ignore those invalid entries during startup and continue loading the valid ones.
+
+- PTcoach will try to save the invalid entries to a separate file for reference. Hence, it is still recommended to make a backup of the data file before editing it manually.<br>
+- Edits that do not follow the required format or valid value range may cause PTcoach to behave in unexpected ways. Edit the data file only if you are confident that you can update it correctly.<br>
+- If you edit the data file while PTcoach is **running**, your changes will not appear in the app immediately and may not be preserved, because the app can overwrite the file when it saves data. Always close PTcoach before editing the data file manually.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Copy `addressbook.json` into the folder you want to move to. (e.g `/path/to/PTcoach/data/addressbook.json`). PTcoach will automatically load the data and overwrite the existing file at the target location.
+**A**: Copy `addressbook.json` into the folder you want to move to. (e.g `/path/to/PTcoach/data/addressbook.json`). PTcoach will automatically load the data.
 
 
 --------------------------------------------------------------------------------------------------------------------
