@@ -5,8 +5,8 @@
 
 # PTcoach
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/se-edu/AY2526S2-CS2103-F11-3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![codecov](https://codecov.io/gh/se-edu/AY2526S2-CS2103-F11-3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 
 ![Ui](images/Ui.png)
 

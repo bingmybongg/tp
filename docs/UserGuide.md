@@ -253,11 +253,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find sarah daniel` returns `Sarah Lim`, `Daniel Lee`<br>
-  ![result for 'find sarah daniel'](images/findSarahDaniel.png)
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -274,7 +269,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from PTcoach.
 
 Format: `clear`
 
@@ -315,8 +310,6 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
