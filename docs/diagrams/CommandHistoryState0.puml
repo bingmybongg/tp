@@ -1,11 +1,14 @@
 @startuml
 !include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
 show member
 hide empty member
 title "Initial State"
 
-Object "<u>:CommandBox" as CommandBox
-Object "<u>:CommandHistory" as CommandHistory {
+Class "<u>:CommandBox" as CommandBox
+Class "<u>:CommandHistory" as CommandHistory {
     commandHistory = []
     current = 0
 }

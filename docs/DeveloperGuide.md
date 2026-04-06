@@ -183,6 +183,9 @@ Step 3. The user presses `Up` key, to retrieve back the past submitted command.
 
 Step 4. The user resubmits a new command (`edit 1 n/Bob Tan`).
 
+<puml src="diagrams/CommandHistoryState3.puml" alt="CommandHistoryState3" />
+
+
 The following sequence diagram shows the relation between `CommandHistory` and `CommandBox`
 
 <puml src="diagrams/CommandHistorySequenceDiagram.puml" alt="CommandHistorySequenceDiagram" />
