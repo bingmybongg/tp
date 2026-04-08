@@ -53,26 +53,127 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TRAINING_GOAL, PREFIX_TIMESLOT,
                 PREFIX_SKILL, PREFIX_PROGRESS_RECORD, PREFIX_INJURY_STATUS);
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-
-        //injuryStatus can be optional
-        InjuryStatus injuryStatus = ParserUtil.parseInjuryStatus(
-            argMultimap.getValue(PREFIX_INJURY_STATUS)
-                    .orElse(InjuryStatus.DEFAULT_INJURY_STATUS));
-
-        TrainingGoal trainingGoal = ParserUtil.parseTrainingGoal(argMultimap.getValue(PREFIX_TRAINING_GOAL).get());
-        Set<Timeslot> timeslots = ParserUtil.parseTimeslots(argMultimap.getAllValues(PREFIX_TIMESLOT));
-        Skill skill = ParserUtil.parseSkill(argMultimap.getValue(PREFIX_SKILL));
-        ProgressRecord progressRecord = ParserUtil.parseProgressRecord(
-                argMultimap.getValue(PREFIX_PROGRESS_RECORD).orElse(ProgressRecord.DEFAULT_PROGRESS));
+        Name name = getName(argMultimap);
+        Phone phone = getPhone(argMultimap);
+        Email email = getEmail(argMultimap);
+        Address address = getAddress(argMultimap);
+        InjuryStatus injuryStatus = getInjuryStatus(argMultimap);
+        TrainingGoal trainingGoal = getTrainingGoal(argMultimap);
+        Set<Timeslot> timeslots = getTimeslots(argMultimap);
+        Skill skill = getSkill(argMultimap);
+        ProgressRecord progressRecord = getProgressRecord(argMultimap);
 
         Person person = new Person(name, phone, email, address, injuryStatus,
             trainingGoal, timeslots, progressRecord, skill);
 
         return new AddCommand(person);
+    }
+
+    /**
+     * Parses and returns a Name object from the argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The Name object parsed from the value associated with the PREFIX_NAME.
+     * @throws ParseException If the name value is invalid or missing.
+     */
+    private Name getName(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+    }
+
+    /**
+     * Parses and returns a Phone object from the argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The Phone object parsed from the value associated with the PREFIX_PHONE.
+     * @throws ParseException If the phone value is invalid or missing.
+     */
+    private Phone getPhone(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+    }
+
+    /**
+     * Parses and returns an Email object from the argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The Email object parsed from the value associated with the PREFIX_EMAIL.
+     * @throws ParseException If the email value is invalid or missing.
+     */
+    private Email getEmail(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+    }
+
+    /**
+     * Parses and returns an Address object from the argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The Address object parsed from the value associated with the PREFIX_ADDRESS.
+     * @throws ParseException If the address value is invalid or missing.
+     */
+    private Address getAddress(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+    }
+
+    /**
+     * Parses and returns an InjuryStatus object from the argument multimap.
+     * If the injury status prefix is not present, the default injury status is used.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The InjuryStatus object parsed from the value associated with the PREFIX_INJURY_STATUS,
+     *         or the default injury status if the prefix is absent.
+     * @throws ParseException If the injury status value is present but invalid.
+     */
+    private InjuryStatus getInjuryStatus(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseInjuryStatus(argMultimap.getValue(PREFIX_INJURY_STATUS)
+                .orElse(InjuryStatus.DEFAULT_INJURY_STATUS));
+    }
+
+    /**
+     * Parses and returns a TrainingGoal object from the argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The TrainingGoal object parsed from the value associated with the PREFIX_TRAINING_GOAL.
+     * @throws ParseException If the training goal value is invalid or missing.
+     */
+    private TrainingGoal getTrainingGoal(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseTrainingGoal(argMultimap.getValue(PREFIX_TRAINING_GOAL).get());
+    }
+
+    /**
+     * Parses and returns a set of Timeslot objects from the argument multimap.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return A Set of Timeslot objects parsed from all values associated with the PREFIX_TIMESLOT.
+     * @throws ParseException If any of the timeslot values are invalid.
+     */
+    private Set<Timeslot> getTimeslots(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseTimeslots(argMultimap.getAllValues(PREFIX_TIMESLOT));
+    }
+
+    /**
+     * Parses and returns a Skill object from the argument multimap.
+     * The skill value is optional and may be absent.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The Skill object parsed from the value associated with the PREFIX_SKILL,
+     *         or the default skill if the prefix is absent.
+     * @throws ParseException If the skill value is present but invalid.
+     */
+    private Skill getSkill(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseSkill(argMultimap.getValue(PREFIX_SKILL));
+    }
+
+    /**
+     * Parses and returns a ProgressRecord object from the argument multimap.
+     * If the progress record prefix is not present, the default progress record is used.
+     *
+     * @param argMultimap The argument multimap containing the parsed command arguments.
+     * @return The ProgressRecord object parsed from the value associated with the PREFIX_PROGRESS_RECORD,
+     *         or the default progress record if the prefix is absent.
+     * @throws ParseException If the progress record value is present but invalid.
+     */
+    private ProgressRecord getProgressRecord(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseProgressRecord(argMultimap.getValue(PREFIX_PROGRESS_RECORD)
+                .orElse(ProgressRecord.DEFAULT_PROGRESS));
     }
 
     /**
