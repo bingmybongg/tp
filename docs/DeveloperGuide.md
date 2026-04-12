@@ -545,6 +545,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+* 1c. Duplicate filter parameters.
+  * 1c1. PTcoach shows a list of clients filtered by skill level.
+
+    Use case ends.
+
 * 2a. No clients match the filter. 
   * 2a1. PTcoach shows an empty list. 
   
